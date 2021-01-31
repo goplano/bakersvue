@@ -40,7 +40,8 @@ export default class Sourdough {
         if (this.isWeights) {
             this.hidden.psalt = this.salt / this.totalFlour * 100;
         }
-        return this.hidden.psalt;
+        if(isNaN(this.hidden.psalt)) return 0;
+        return Math.round(this.hidden.psalt * 10) / 10;
     }
 
     set psalt(val) {
@@ -51,7 +52,8 @@ export default class Sourdough {
         if (this.isWeights) {
             this.hidden.pstarter = this.starter / this.totalFlour * 100;
         }
-        return this.hidden.pstarter;
+        if(isNaN(this.hidden.pstarter)) return 0;
+        return Math.round(this.hidden.pstarter * 10) / 10;
     }
 
     set pstarter(val) {
@@ -60,10 +62,9 @@ export default class Sourdough {
 
     get flour() {
         if (this.usingVWG) {
-            return this.hidden.flour;
+            return Math.round(this.hidden.flour);
         }
         if (this.isPercents) {
-            // this.hidden.flour = this.pflour / 100  * this.totalFlour;
             this.hidden.flour = this.totalFlour - this.levainFlour;
         }
         return Math.round(this.hidden.flour);
@@ -109,6 +110,7 @@ export default class Sourdough {
         if (this.isWeights) {
             this.hidden.totalWeight = this.totalFlour + this.totalWater + parseInt(this.salt);
         }
+        if(isNaN(this.hidden.totalWeight)) return 0;
         return Math.round(this.hidden.totalWeight);
     }
 
@@ -173,7 +175,8 @@ export default class Sourdough {
         if (this.isWeights) {
             this.hidden.hydration = parseFloat(parseInt(this.totalWater) / parseInt(this.totalFlour) * 100);
         }
-        return this.hidden.hydration;
+        if(isNaN(this.hidden.hydration)) return 0;
+        return Math.round(this.hidden.hydration * 10) / 10;
     }
 
     set hydration(val) {

@@ -76,13 +76,13 @@
             <input-field v-model="sd.totalWeight">weight</input-field>
           </div>
           <div class="mt-1 mb-2">
-            <input-field v-model="hydration">hydration</input-field>
+            <input-field v-model="sd.hydration">hydration</input-field>
           </div>
           <div class="mt-1 mb-2">
-            <input-field v-model="psalt">% salt</input-field>
+            <input-field v-model="sd.psalt">% salt</input-field>
           </div>
           <div class="mt-1 mb-2">
-            <input-field v-model="pstarter">% starter</input-field>
+            <input-field v-model="sd.pstarter">% starter</input-field>
           </div>
         </div>
 
@@ -137,7 +137,7 @@ export default {
       sd: sd,
       pstarter: this.pstarter,
       psalt: this.psalt,
-      hydration: this.hydration
+      hydration: this.hydration,
     }
   },
   components: {InputField},
@@ -149,6 +149,9 @@ export default {
         this.openInstructions();
       }
     });
+    this.hydration = parseInt(this.sd.hydration * 10) / 10;
+    this.pstarter =  parseInt(this.sd.pstarter * 10) / 10;
+    this.psalt =  parseInt(this.sd.psalt * 10) / 10;
   },
 
   unmounted() {
@@ -156,12 +159,15 @@ export default {
   },
   methods: {
     formatPercent(num) {
+      if(isNaN(num)) return '';
       return new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 1,
         style: "percent"
-      }).format(num);
+      }).format(num/100);
     },
     formatWeight(num) {
+      if(isNaN(num)) return '';
+
       return new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 1,
       }).format(num) + 'g';
@@ -186,7 +192,7 @@ export default {
             return (parseInt(this.sd.pstarter * 10) / 10);
           },
           set: function (value) {
-            this.sd.pstarter = value;
+            this.sd.hidden.pstarter = value;
           }
         },
         hydration: {
@@ -196,7 +202,7 @@ export default {
           set: function (value) {
             this.sd.hydration = value;
           }
-        },
+        }
       }
     },
   }
