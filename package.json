@@ -2,6 +2,16 @@
   "name": "bakersvue",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/goplano/bakersvue",
+  "bugs": "https://github.com/goplano/bakersvue/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goplano/bakersvue"
+  },
+  "author": {
+    "name": "Sue Carson",
+    "url": "https://github.com/goplano"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

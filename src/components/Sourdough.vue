@@ -158,8 +158,7 @@ export default {
     formatPercent(num) {
       return new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 1,
-        style: 'unit',
-        unit: "percent"
+        style: "percent"
       }).format(num);
     },
     formatWeight(num) {
